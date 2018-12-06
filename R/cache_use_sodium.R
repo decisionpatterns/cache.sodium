@@ -1,10 +1,10 @@
 sodium_extension = 'sodium.rds'
 
-#' Cache objects using sodium (Sodium) encryption
+#' Cache objects using sodium (Sodium)
 #'
 #' Caches objects with sodium encryption using the *sodium* package
 #'
-#' @param key string; sets the en/decryption key `cache.sodium_key`.
+#' @param key string; sets the en/decryption key `cache.sodium.key`.
 #'   The default (NULL) does not set a key.
 #'
 #' @details
@@ -31,16 +31,27 @@ cache_use_sodium <- function(key=NULL) {
   if( ! require(sodium) )
     stop("\n`cache_use_sodium` requires the sodium packages. Install it with:\n\tinstall.packages('sodium')")
 
-  if( ! is.null(key) ) set_option( cache.sodium_key = key )
+  if( ! is.null(key) ) set_option( cache.sodium.key = key )
 
-  if( is.null(getOption("cache.sodium_key") ) )
-    set_option( cache.sodium_key = readline("Encryption key (sodium)? ") )
+  if( is.null(getOption("cache.sodium.key") ) )
+    set_option( cache.sodium.key = readline("Encryption key (sodium)? ") )
 
-
-  options(
-      cache.write    = cache_write_sodium
-    , cache.read     = cache_read_sodium
-    , cache.file_ext = sodium_extension
+  cache::cache_register_backend(
+      ext = sodium_extension
+    , read = cache_read_sodium
+    , write = cache_write_sodium
   )
 
 }
+
+
+
+#' @rdname cache_use_sodium
+#' @export
+
+cache_use_aes <- function(...) {
+  .Deprecated("cache_use_sodium", old="cache_use_aes")
+  cache_use_sodium(...)
+}
+
+

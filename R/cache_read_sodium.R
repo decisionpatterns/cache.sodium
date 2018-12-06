@@ -17,7 +17,7 @@
 cache_read_sodium <- function(
     name
   , cache = cache_find()
-  , key = getOption("cache.sodium_key", set_option( cache.sodium_key = readline("sodium Encryption Key? ") ) )
+  , key = getOption("cache.sodium.key", set_option( cache.sodium.key = readline("sodium Encryption Key? ") ) )
 ) {
 
   if( ! require(sodium) ) stop("The sodium is required for decrypting data sets.")
