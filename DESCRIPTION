@@ -1,19 +1,20 @@
 Package: cache.sodium
 Title: Sodium Extension to 'cache' Package
-Version: 0.1.0
-Date: 2018-11-03
+Version: 0.2.0
+Date: 2018-12-17
 Authors@R: c(
     person("Christopher", "Brown", , "chris.brown@decisionpatterns.com", c("aut", "cre") ),
     person("Decision Patterns", role = "cph")
     )
 URL: https://github.com/decisionpatterns/cache-sodium
 BugReports: https://github.com/decisionpatterns/cache-sodium/issues
-Description: Extensions to the 'cache' package that uses sodium to 
+Description: Enhances the 'cache' package to use 'sodium' as a backend for 
+    storing encrypted files to the local cache directory. 
 Depends:
     R (>= 3.1.0),
     sodium (>= 1.1)
 Enhances:
-    cache (>= 0.2.4.1)
+    cache (>= 0.2.9)
 Suggests: 
     testthat (>= 1.0.2), 
 License: GPL-3 | file LICENSE

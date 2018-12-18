@@ -14,26 +14,12 @@
 #' @importFrom fs path_ext_set
 #' @export
 
-cache_read_sodium <- function(
-    name
-  , cache = cache_find()
+read_sodium <- function(
+    path
   , key = getOption("cache.sodium.key", set_option( cache.sodium.key = readline("sodium Encryption Key? ") ) )
 ) {
 
-  if( ! require(sodium) ) stop("The sodium is required for decrypting data sets.")
-
-  path <- {
-    cache ->.;
-      fs::path( ., name ) ->.;
-      if( path_ext(.) == '' )
-        fs::path_ext_set( ., sodium_extension ) else
-        paste( . , sodium_extension, sep = ".")
-    }
-
-  path  ->.;
-    readRDS(.) ->.;
+  read_rds(path) ->.;
     sodium_decrypt(., key)
 
 }
-
-

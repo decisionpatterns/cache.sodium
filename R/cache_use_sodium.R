@@ -1,5 +1,3 @@
-sodium_extension = 'sodium.rds'
-
 #' Cache objects using sodium (Sodium)
 #'
 #' Caches objects with sodium encryption using the *sodium* package
@@ -36,22 +34,15 @@ cache_use_sodium <- function(key=NULL) {
   if( is.null(getOption("cache.sodium.key") ) )
     set_option( cache.sodium.key = readline("Encryption key (sodium)? ") )
 
-  cache::cache_register_backend(
-      ext = sodium_extension
-    , read = cache_read_sodium
-    , write = cache_write_sodium
-  )
+  cache_register_sodium()
+  cache_default('sodium')
 
 }
-
-
 
 #' @rdname cache_use_sodium
 #' @export
 
-cache_use_aes <- function(...) {
-  .Deprecated("cache_use_sodium", old="cache_use_aes")
-  cache_use_sodium(...)
-}
-
+cache_sodium_key <- function(key=NULL)
+  if( is.null(key) ) return( get_option('cache.sodium.key') ) else
+    options(cache.sodium.key = key )
 

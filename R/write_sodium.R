@@ -1,5 +1,5 @@
 #' @param object object to store.
-#' @param name string; name of object
+#' @param path string; path to object
 #' @param cache string; path to cache directory. Defaults to [cache_find()]
 #' @param key string; encrypton key. Defaults to option cache.sodium_key
 #'
@@ -24,12 +24,11 @@
 #' @rdname cache_use_sodium
 #' @export
 
-cache_write_sodium <- function(
+write_sodium <- function(
     object
-  , key = getOption( "cache.sodium_key", set_option( cache.sodium_key = readline("sodium Encryption Key? ") ) )
+  , path
+  , key = getOption( "cache.sodium.key", set_option( cache.sodium_key = readline("sodium Encryption Key? ") ) )
   , ...
-  , name = deparse( substitute(object) )
-  , cache = cache_find()
 ) {
 
   if( ! require(sodium) ) stop( "The sodium is required for encrypting data sets.")
@@ -38,9 +37,6 @@ cache_write_sodium <- function(
     sodium_encrypt(., key) ->
     write_this
 
-  path <- fs::path( cache, paste0( name, ".", sodium_extension ) )
+  write_rds( write_this, path, ... )
 
-  save_rds( write_this, path, ... )
-
-  invisible(object)
 }
