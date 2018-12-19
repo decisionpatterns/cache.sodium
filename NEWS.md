@@ -1,5 +1,4 @@
 # cache.sodium 0.2.0 
-
  * Accommodate changes made to *cache* package
  * Greatly simplify code and interface
 
