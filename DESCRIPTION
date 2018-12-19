@@ -12,8 +12,7 @@ Description: Enhances the 'cache' package to use 'sodium' as a backend for
     storing encrypted files to the local cache directory. 
 Depends:
     R (>= 3.1.0),
-    sodium (>= 1.1)
-Enhances:
+    sodium (>= 1.1),
     cache (>= 0.2.9)
 Suggests: 
     testthat (>= 1.0.2), 

@@ -18,8 +18,11 @@
   )
 
   # Register this package.
+  # browser()
   if( require(cache) ) cache_register_sodium()
-  if( is.null(cache_backend() ) ) cache_use_sodium()
+  # cache_backend()
+  # cache_use_sodium()
+  # if( is.null(cache_backend() ) ) cache_use_sodium()
 
 }
 
