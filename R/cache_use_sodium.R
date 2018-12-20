@@ -30,11 +30,12 @@ cache_use_sodium <- function(key=NULL) {
     stop("\n`cache_use_sodium` requires the sodium packages. Install it with:\n\tinstall.packages('sodium')")
 
   # SET DE/ENCRYPTION KEY
-  if( ! is.null(key) )
-    sodium_set_key(key) else
-    sodium_ask_key()
+  if( ! is.null(key) ) sodium_set_key(key)
+  if( is.null(sodium_get_key()) ) sodium_ask_key()
+  if( is.null(sodium_get_key()) ) message("Use 'cache_sodium_key()' to set the encryption key.")
 
-  cache_register_sodium()
+  if( ! "sodium" %in% cache::backend_ls() ) cache_register_sodium()
   cache_backend('sodium')
 
+  invisible(TRUE)
 }
