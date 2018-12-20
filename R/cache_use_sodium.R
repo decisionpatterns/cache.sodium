@@ -29,20 +29,12 @@ cache_use_sodium <- function(key=NULL) {
   if( ! require(sodium) )
     stop("\n`cache_use_sodium` requires the sodium packages. Install it with:\n\tinstall.packages('sodium')")
 
-  if( ! is.null(key) ) set_option( cache.sodium.key = key )
-
-  if( is.null(getOption("cache.sodium.key") ) )
-    set_option( cache.sodium.key = readline("Encryption key (sodium)? ") )
+  # SET DE/ENCRYPTION KEY
+  if( ! is.null(key) )
+    sodium_set_key(key) else
+    sodium_ask_key()
 
   cache_register_sodium()
-  cache_default('sodium')
+  cache_backend('sodium')
 
 }
-
-#' @rdname cache_use_sodium
-#' @export
-
-cache_sodium_key <- function(key=NULL)
-  if( is.null(key) ) return( get_option('cache.sodium.key') ) else
-    options(cache.sodium.key = key )
-

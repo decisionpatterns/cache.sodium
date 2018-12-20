@@ -1,13 +1,12 @@
-#' Read cache using sodium
+#' Read and write using sodium
 #'
-#' @param name string; name of object in the cache
-#' @param cache string; path to cache directory. Defaults to [cache_find()]
-#' @param key string; key for writing and resotring
+#' Reads or writes a file using sodium encryption
+#'
+#' @param path string; path to
+#' @param key string; encryption key
 #'
 #' @details
-#'
-#' `cache_read_sodium` reads an AES encrypted object from the cache. `AES`
-#' encrypted objects are
+#' [read_sodium()] reads a sodium encrypted object at path.
 #'
 #' @importFrom sodium data_decrypt
 #' @importFrom fs path
@@ -16,10 +15,51 @@
 
 read_sodium <- function(
     path
-  , key = getOption("cache.sodium.key", set_option( cache.sodium.key = readline("sodium Encryption Key? ") ) )
+  , key = sodium_get_key_or_ask()
 ) {
 
   read_rds(path) ->.;
     sodium_decrypt(., key)
+
+}
+
+#' @param object object to store.
+#' @param ... additional arguments sent to [base::readRDS()]
+#'
+#' @details
+#' [write_sodium()] stores an encrypted object to the path.
+
+#' In most cases,[cache::cache()] / [cache::uncache()] and
+#' [cache::cache_write()]/[cache::cache_read()] should be used.
+#'
+#' The extension given to sodium encrypted files is `sodium.rds`.
+#'
+#' @return
+#'   `object` (In order to be pipe-able, the object must be returned)
+#'
+#' @examples
+#'   write_sodium( iris, "my key" )
+#'   read_sodium( 'iris', "my key" )
+#'
+#' @importFrom sodium data_encrypt
+#' @importFrom sodium data_decrypt
+#' @rdname read_sodium
+# @export
+
+write_sodium <- function(
+    object
+  , path
+  , key = sodium_get_key_or_ask()
+  , ...
+) {
+
+  if( ! require(sodium) )
+    stop( "The sodium is required for encrypting data sets.")
+
+  object  ->.;
+    sodium_encrypt(., key) ->
+    write_this
+
+  write_rds( write_this, path, ... )
 
 }

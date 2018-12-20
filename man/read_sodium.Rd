@@ -2,22 +2,39 @@
 % Please edit documentation in R/read_sodium.R
 \name{read_sodium}
 \alias{read_sodium}
-\title{Read cache using sodium}
+\alias{write_sodium}
+\title{Read and write using sodium}
 \usage{
-read_sodium(path, key = getOption("cache.sodium.key",
-  set_option(cache.sodium.key = readline("sodium Encryption Key? "))))
+read_sodium(path, key = sodium_get_key_or_ask())
+
+write_sodium(object, path, key = sodium_get_key_or_ask(), ...)
 }
 \arguments{
-\item{key}{string; key for writing and resotring}
+\item{path}{string; path to}
 
-\item{name}{string; name of object in the cache}
+\item{key}{string; encryption key}
 
-\item{cache}{string; path to cache directory. Defaults to \code{\link[=cache_find]{cache_find()}}}
+\item{object}{object to store.}
+
+\item{...}{additional arguments sent to \code{\link[base:readRDS]{base::readRDS()}}}
+}
+\value{
+\code{object} (In order to be pipe-able, the object must be returned)
 }
 \description{
-Read cache using sodium
+Reads or writes a file using sodium encryption
 }
 \details{
-\code{cache_read_sodium} reads an AES encrypted object from the cache. \code{AES}
-encrypted objects are
+\code{\link[=read_sodium]{read_sodium()}} reads a sodium encrypted object at path.
+
+\code{\link[=write_sodium]{write_sodium()}} stores an encrypted object to the path.
+In most cases,\code{\link[cache:cache]{cache::cache()}} / \code{\link[cache:uncache]{cache::uncache()}} and
+\code{\link[cache:cache_write]{cache::cache_write()}}/\code{\link[cache:cache_read]{cache::cache_read()}} should be used.
+
+The extension given to sodium encrypted files is \code{sodium.rds}.
+}
+\examples{
+  write_sodium( iris, "my key" )
+  read_sodium( 'iris', "my key" )
+
 }
