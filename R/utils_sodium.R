@@ -20,3 +20,10 @@ sodium_decrypt <- function(object,key) {
     unserialize(.)
 
 }
+
+# The key used must be converted.
+sodium_make_key <- function(key) {
+  key  ->.;
+   charToRaw(.) ->.;
+   sha256(.)
+}
