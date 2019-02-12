@@ -34,7 +34,7 @@ cache_use_sodium <- function(key=NULL) {
   if( is.null(sodium_get_key()) ) sodium_ask_key()
   if( is.null(sodium_get_key()) ) message("Use 'cache_sodium_key()' to set the encryption key.")
 
-  if( ! "sodium" %in% cache::backend_ls() ) cache_register_sodium()
+  if( ! "sodium" %in% cache::backends_ls() ) cache_register_sodium()
   cache_backend('sodium')
 
   invisible(TRUE)
