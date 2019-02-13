@@ -15,6 +15,10 @@ the default method for reading/writing to the cache.  There is generally no
 reason to invoke this function as it is called when the packages is
 attached.
 }
+\note{
+The call to \code{cache_register_backend} can be placed in \code{zzz.R} and not
+exist as a separate function.
+}
 \seealso{
 \itemize{
 \item \code{\link[=cache_use_sodium]{cache_use_sodium()}}

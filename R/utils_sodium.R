@@ -1,5 +1,13 @@
 # Sodium Utilities
 # Non-exported utilities
+#
+# @details
+# These utilities combine [base::serialize()] with [sodium::data_encrypt()] so
+# that data can be written as an `rds` file. These do not handle the
+# writing/reading.
+#
+# See [sodium_read()] and [sodium_write()] which make use of these functions.
+
 
 sodium_encrypt <- function(object,key) {
 
@@ -7,7 +15,7 @@ sodium_encrypt <- function(object,key) {
 
   object  ->.;
     serialize(., NULL)  ->.;
-    data_encrypt(., sodium_make_key(key) )
+    sodium::data_encrypt(., sodium_make_key(key) )
 
 }
 
@@ -16,7 +24,7 @@ sodium_decrypt <- function(object,key) {
   if( ! require(sodium) ) stop("The sodium is required for decrypting data sets.")
 
   object ->.;
-    data_decrypt( ., sodium_make_key(key) ) ->.;
+    sodium::data_decrypt( ., sodium_make_key(key) ) ->.;
     unserialize(.)
 
 }

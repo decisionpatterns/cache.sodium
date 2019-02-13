@@ -9,6 +9,10 @@
 #' reason to invoke this function as it is called when the packages is
 #' attached.
 #'
+#' @note
+#' The call to `cache_register_backend` can be placed in `zzz.R` and not
+#' exist as a separate function.
+#'
 #' @seealso
 #'  - [cache_use_sodium()]
 #'
@@ -26,8 +30,8 @@ cache_register_sodium <- function() {
       name = 'sodium'
     , ext = EXTENSION
     , pkg = PKG
-    , reader = read_sodium
-    , writer = write_sodium
+    , reader = sodium_read
+    , writer = sodium_write
   )
 
 }

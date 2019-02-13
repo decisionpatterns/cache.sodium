@@ -6,14 +6,14 @@
 #' @param key string; encryption key
 #'
 #' @details
-#' [read_sodium()] reads a sodium encrypted object at path.
+#' [sodium_read()] reads a sodium encrypted object at path.
 #'
 #' @importFrom sodium data_decrypt
 #' @importFrom fs path
 #' @importFrom fs path_ext_set
 #' @export
 
-read_sodium <- function(
+sodium_read <- function(
     path
   , key = sodium_get_key_or_ask()
 ) {
@@ -27,7 +27,7 @@ read_sodium <- function(
 #' @param ... additional arguments sent to [base::readRDS()]
 #'
 #' @details
-#' [write_sodium()] stores an encrypted object to the path.
+#' [sodium_write()] stores an encrypted object to the path.
 
 #' In most cases,[cache::cache()] / [cache::uncache()] and
 #' [cache::cache_write()]/[cache::cache_read()] should be used.
@@ -38,15 +38,15 @@ read_sodium <- function(
 #'   `object` (In order to be pipe-able, the object must be returned)
 #'
 #' @examples
-#'   write_sodium( iris, "my key" )
-#'   read_sodium( 'iris', "my key" )
+#'   sodium_write( iris, "my key" )
+#'   sodium_read( 'iris', "my key" )
 #'
 #' @importFrom sodium data_encrypt
 #' @importFrom sodium data_decrypt
-#' @rdname read_sodium
-# @export
+#' @rdname sodium_read
+#' @export
 
-write_sodium <- function(
+sodium_write <- function(
     object
   , path
   , key = sodium_get_key_or_ask()
@@ -60,6 +60,10 @@ write_sodium <- function(
     sodium_encrypt(., key) ->
     write_this
 
+  # side-effect
   write_rds( write_this, path, ... )
 
+ invisible(object)
+
 }
+

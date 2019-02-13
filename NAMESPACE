@@ -2,10 +2,11 @@
 
 export(cache_sodium_key)
 export(cache_use_sodium)
-export(read_sodium)
 export(sodium_get_key)
 export(sodium_get_key_or_ask)
+export(sodium_read)
 export(sodium_set_key)
+export(sodium_write)
 import(cache)
 importFrom(fs,path)
 importFrom(fs,path_ext_set)
