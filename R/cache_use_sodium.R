@@ -1,6 +1,6 @@
-#' Cache objects using sodium (Sodium)
+#' Tell cache to use sodium backend by default
 #'
-#' Caches objects with sodium encryption using the *sodium* package
+#' Caches objects by default with sodium encryption using the *sodium* package
 #'
 #' @param key string; sets the en/decryption key `cache.sodium.key`.
 #'   The default (NULL) does not set a key.

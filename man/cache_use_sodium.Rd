@@ -2,7 +2,7 @@
 % Please edit documentation in R/cache_use_sodium.R
 \name{cache_use_sodium}
 \alias{cache_use_sodium}
-\title{Cache objects using sodium (Sodium)}
+\title{Tell cache to use sodium backend by default}
 \usage{
 cache_use_sodium(key = NULL)
 }
@@ -11,7 +11,7 @@ cache_use_sodium(key = NULL)
 The default (NULL) does not set a key.}
 }
 \description{
-Caches objects with sodium encryption using the \emph{sodium} package
+Caches objects by default with sodium encryption using the \emph{sodium} package
 }
 \details{
 Encrypts cached datasets using sodium256 encryption provided by the \emph{sodium}
