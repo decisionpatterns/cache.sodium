@@ -1,3 +1,7 @@
+# cache.sodium 0.2.6 - 2020-05-23
+ * Fix sodium_read and sodium_write
+ * Add test(s)
+
 # cache.sodium 0.2.0 
  * Accommodate changes made to *cache* package
  * Greatly simplify code and interface

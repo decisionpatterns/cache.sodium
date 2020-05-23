@@ -34,7 +34,7 @@ In most cases,\code{\link[cache:cache]{cache::cache()}} / \code{\link[cache:unca
 The extension given to sodium encrypted files is \code{sodium.rds}.
 }
 \examples{
-  sodium_write( iris, "my key" )
-  sodium_read( 'iris', "my key" )
+  sodium_write( iris, 'iris.rds', "my key" )
+  sodium_read( 'iris.rds', "my key" )
 
 }

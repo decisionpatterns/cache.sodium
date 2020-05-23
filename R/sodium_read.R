@@ -38,8 +38,8 @@ sodium_read <- function(
 #'   `object` (In order to be pipe-able, the object must be returned)
 #'
 #' @examples
-#'   sodium_write( iris, "my key" )
-#'   sodium_read( 'iris', "my key" )
+#'   sodium_write( iris, 'iris.rds', "my key" )
+#'   sodium_read( 'iris.rds', "my key" )
 #'
 #' @importFrom sodium data_encrypt
 #' @importFrom sodium data_decrypt

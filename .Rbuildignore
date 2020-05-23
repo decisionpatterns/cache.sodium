@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 cache/
 sodium/
+tests/testthat/cache/

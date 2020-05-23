@@ -21,10 +21,10 @@
 
 cache_register_sodium <- function() {
 
-  if( interactive() )
-    message(  "Registering 'cache.sodium' as a cache backend.\n"
-          , "  Use 'cache_use_sodium()' to set it as the default."
-    )
+  if( interactive() ) {
+    message( "Registering 'cache.sodium' as a cache backend." )
+    message( "  Use 'cache_use_sodium(...)' to set it as the default." )
+  }
 
   cache::cache_backend_register(
       name = 'sodium'
