@@ -1,4 +1,4 @@
-# cache.sodium 0.2.6 - 2020-05-23
+# cache.sodium 0.3 - 2020-05-23
  * Fix sodium_read and sodium_write
  * Add test(s)
 
